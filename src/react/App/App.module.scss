@@ -1,0 +1,27 @@
+// @import 'bootstrap';
+@import '../global.scss';
+
+#gridContainer {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 33.3% 33.3% 33.3%;
+  grid-template-areas: 'main' 'playlist' 'config';
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-rows: none;
+    grid-template-areas: 'config main playlist';
+  }
+}
+
+#config {
+  grid-area: config;
+}
+
+#main {
+  grid-area: main;
+}
+
+#playlist {
+  grid-area: playlist;
+}
