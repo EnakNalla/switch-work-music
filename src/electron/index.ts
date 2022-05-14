@@ -1,13 +1,17 @@
 import { app, BrowserWindow } from 'electron';
 import { join } from 'path';
+import { storeIpc } from './electronStore';
 
 let window: BrowserWindow;
+
+storeIpc();
 
 const createWindow = () => {
   window = new BrowserWindow({
     show: false,
     webPreferences: {
-      webSecurity: false
+      webSecurity: false,
+      preload: join(__dirname, 'preload.js')
     }
   });
 

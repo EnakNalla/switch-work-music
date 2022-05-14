@@ -1,0 +1,3 @@
+interface ElectronStore {
+  timers: Timer[];
+}

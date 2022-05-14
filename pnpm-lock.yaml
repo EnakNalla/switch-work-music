@@ -20,6 +20,8 @@ specifiers:
   jest: ^28.1.0
   jest-environment-jsdom: ^28.1.0
   jest-transform-stub: ^2.0.0
+  mobx: ^6.5.0
+  mobx-react-lite: ^3.4.0
   react: ^18.0.0
   react-bootstrap: ^2.4.0
   react-dom: ^18.0.0
@@ -51,6 +53,8 @@ devDependencies:
   jest: 28.1.0
   jest-environment-jsdom: 28.1.0
   jest-transform-stub: 2.0.0
+  mobx: 6.5.0
+  mobx-react-lite: 3.4.0_xxy2mkjogmxzsnsiyy6ct534gi
   react: 18.1.0
   react-bootstrap: 2.4.0_ohobp6rpsmerwlq5ipwfh5yigy
   react-dom: 18.1.0_react@18.1.0
@@ -3997,6 +4001,28 @@ packages:
     hasBin: true
     dependencies:
       minimist: 1.2.6
+    dev: true
+
+  /mobx-react-lite/3.4.0_xxy2mkjogmxzsnsiyy6ct534gi:
+    resolution: {integrity: sha512-bRuZp3C0itgLKHu/VNxi66DN/XVkQG7xtoBVWxpvC5FhAqbOCP21+nPhULjnzEqd7xBMybp6KwytdUpZKEgpIQ==}
+    peerDependencies:
+      mobx: ^6.1.0
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      mobx: 6.5.0
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+    dev: true
+
+  /mobx/6.5.0:
+    resolution: {integrity: sha512-pHZ/cySF00FVENDWIDzJyoObFahK6Eg4d0papqm6d7yMkxWTZ/S/csqJX1A3PsYy4t5k3z2QnlwuCfMW5lSEwA==}
     dev: true
 
   /ms/2.0.0:
