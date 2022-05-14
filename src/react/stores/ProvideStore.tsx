@@ -5,10 +5,10 @@ let StoreContext: Context<RootStore>;
 
 interface Props {
   children: ReactNode;
+  store?: any;
 }
 
-const ProvideStore = ({ children }: Props) => {
-  const store = new RootStore();
+const ProvideStore = ({ children, store = new RootStore() }: Props) => {
   StoreContext = createContext(store);
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
