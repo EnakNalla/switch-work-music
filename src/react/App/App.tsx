@@ -1,9 +1,29 @@
-import { Image } from 'react-bootstrap';
+import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
+import { Container, Image, Spinner } from 'react-bootstrap';
+import { useStore } from '../stores/ProvideStore';
 import styles from './App.module.scss';
 
 const App = () => {
+  const store = useStore();
+
+  useEffect(() => {
+    store.initData();
+  }, []);
+
+  if (store.loading) {
+    return (
+      <div className="d-flex align-items-center min-vh-100 justify-content-center">
+        <div className="text-center">
+          <Spinner animation="border" />
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div id={styles.gridContainer} className="text-center">
+    <Container fluid id={styles.gridContainer} className="text-center">
       <div id={styles.config}>
         <h3>Config</h3>
       </div>
@@ -16,8 +36,8 @@ const App = () => {
       <div id={styles.playlist} className="text-center">
         <h3>Playlist</h3>
       </div>
-    </div>
+    </Container>
   );
 };
 
-export default App;
+export default observer(App);
