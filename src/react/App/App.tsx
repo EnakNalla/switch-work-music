@@ -4,6 +4,7 @@ import { Container, Image, Spinner } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import Config from '../components/Config/Config';
+import Playlist from '../components/Playlist/Playlist';
 import { useStore } from '../stores/ProvideStore';
 import styles from './App.module.scss';
 
@@ -38,6 +39,7 @@ const App = () => {
 
       <div id={styles.playlist} className="text-center">
         <h3>Playlist</h3>
+        <Playlist />
       </div>
 
       <ToastContainer position="bottom-right" />

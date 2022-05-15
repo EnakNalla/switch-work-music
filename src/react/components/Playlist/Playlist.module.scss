@@ -1,0 +1,12 @@
+#playlistContainer {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+#playlist:hover {
+  cursor: pointer;
+}
+
+.active {
+  background-color: lightgray;
+}

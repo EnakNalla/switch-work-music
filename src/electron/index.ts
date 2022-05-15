@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import { join } from 'path';
 import { storeIpc } from './electronStore';
 
@@ -35,4 +35,16 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
+});
+
+ipcMain.handle('selectSongs', () => {
+  return dialog.showOpenDialog(window, {
+    properties: ['openFile', 'multiSelections'],
+    filters: [
+      {
+        name: 'mp3,ogg,wav',
+        extensions: ['mp3', 'ogg', 'wav']
+      }
+    ]
+  });
 });

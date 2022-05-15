@@ -14,7 +14,7 @@ describe('<App />', () => {
       loading: false,
       initData: jest.fn(),
       configStore: { timers: [] },
-      playerStore: { timer: timerStub() }
+      playerStore: { timer: timerStub(), songs: [] }
     });
 
     expect(screen.getByText('Switch work Music')).toBeInTheDocument();
