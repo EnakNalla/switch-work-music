@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx';
-import { toast } from 'react-toastify';
 
 export default class ConfigStore {
   timers: Timer[] = [];
@@ -10,15 +9,14 @@ export default class ConfigStore {
 
   addTimer = (timer: Timer) => {
     if (this.timers.some(t => t.name === timer.name)) {
-      toast.error(`Timer ${timer.name} already exists`);
-      return;
+      throw new Error(`Timer ${timer.name} already exists`);
     }
 
     if (timer.default) {
       this.timers.find(t => t.default)!.default = false;
     }
 
-    this.timers.push(timer);
+    this.timers.push({ ...timer, playtime: timer.playtime * 1000 });
     this.saveTimers();
   };
 

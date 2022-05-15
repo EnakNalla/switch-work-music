@@ -9,7 +9,7 @@ export default class RootStore {
   configStore: ConfigStore;
 
   constructor() {
-    this.playerStore = new PlayerStore();
+    this.playerStore = new PlayerStore(this);
     this.configStore = new ConfigStore();
 
     makeAutoObservable(this, { playerStore: false });

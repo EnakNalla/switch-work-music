@@ -10,14 +10,12 @@ describe('ConfigStore', () => {
   });
 
   describe('addTimer', () => {
-    it('should toast an error when timer exists', () => {
+    it('should throw an error when timer exists', () => {
       jest.spyOn(toast, 'error');
       const timer = timerStub();
       configStore.timers = [timer];
 
-      configStore.addTimer(timer);
-
-      expect(toast.error).toHaveBeenCalledWith(`Timer ${timer.name} already exists`);
+      expect(() => configStore.addTimer(timer)).toThrowError(`Timer ${timer.name} already exists`);
     });
 
     it('should add a timer and ensure there is a single default', () => {
@@ -27,7 +25,10 @@ describe('ConfigStore', () => {
 
       configStore.addTimer(timer2);
 
-      expect(window.api.setTimers).toHaveBeenCalledWith([{ ...timer, default: false }, timer2]);
+      expect(window.api.setTimers).toHaveBeenCalledWith([
+        { ...timer, default: false },
+        { ...timer2, playtime: 30000000 }
+      ]);
     });
   });
 
