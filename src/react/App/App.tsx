@@ -1,6 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { Container, Image, Spinner } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import { useStore } from '../stores/ProvideStore';
 import styles from './App.module.scss';
 
@@ -36,6 +38,8 @@ const App = () => {
       <div id={styles.playlist} className="text-center">
         <h3>Playlist</h3>
       </div>
+
+      <ToastContainer position="bottom-right" />
     </Container>
   );
 };

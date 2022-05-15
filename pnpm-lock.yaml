@@ -25,6 +25,7 @@ specifiers:
   react: ^18.0.0
   react-bootstrap: ^2.4.0
   react-dom: ^18.0.0
+  react-toastify: ^9.0.1
   sass: ^1.51.0
   ts-jest: ^28.0.2
   typescript: ^4.6.3
@@ -58,6 +59,7 @@ devDependencies:
   react: 18.1.0
   react-bootstrap: 2.4.0_ohobp6rpsmerwlq5ipwfh5yigy
   react-dom: 18.1.0_react@18.1.0
+  react-toastify: 9.0.1_ef5jwxihqo6n7gxfmzogljlgcm
   sass: 1.51.0
   ts-jest: 28.0.2_qy5m32hwmbz5mebulkdtchzcz4
   typescript: 4.6.4
@@ -1752,6 +1754,11 @@ packages:
     resolution: {integrity: sha1-0dyXOSAxTfZ/vrlCI7TuNQI56Ws=}
     dependencies:
       mimic-response: 1.0.1
+    dev: true
+
+  /clsx/1.1.1:
+    resolution: {integrity: sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==}
+    engines: {node: '>=6'}
     dev: true
 
   /co/4.6.0:
@@ -4411,6 +4418,17 @@ packages:
   /react-refresh/0.13.0:
     resolution: {integrity: sha512-XP8A9BT0CpRBD+NYLLeIhld/RqG9+gktUjW1FkE+Vm7OCinbG1SshcK5tb9ls4kzvjZr9mOQc7HYgBngEyPAXg==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /react-toastify/9.0.1_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-c2zeZHkCX+WXuItS/JRqQ/8CH8Qm/je+M0rt09xe9fnu5YPJigtNOdD8zX4fwLA093V2am3abkGfOowwpkrwOQ==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      clsx: 1.1.1
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
     dev: true
 
   /react-transition-group/4.4.2_ef5jwxihqo6n7gxfmzogljlgcm:
