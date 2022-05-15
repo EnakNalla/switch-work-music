@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Container, Image, Spinner } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import Config from '../components/Config/Config';
 import { useStore } from '../stores/ProvideStore';
 import styles from './App.module.scss';
 
@@ -27,7 +28,7 @@ const App = () => {
   return (
     <Container fluid id={styles.gridContainer} className="text-center">
       <div id={styles.config}>
-        <h3>Config</h3>
+        <Config />
       </div>
 
       <div id={styles.main} className="text-center">

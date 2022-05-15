@@ -1,4 +1,5 @@
 import { render, screen } from '../test-utils/rtl';
+import { timerStub } from '../test-utils/stubs/playerStubs';
 import App from './App';
 
 describe('<App />', () => {
@@ -9,7 +10,12 @@ describe('<App />', () => {
   });
 
   it('should render "Switch work Music"', () => {
-    render(<App />, { loading: false, initData: jest.fn() });
+    render(<App />, {
+      loading: false,
+      initData: jest.fn(),
+      configStore: { timers: [] },
+      playerStore: { timer: timerStub() }
+    });
 
     expect(screen.getByText('Switch work Music')).toBeInTheDocument();
   });
