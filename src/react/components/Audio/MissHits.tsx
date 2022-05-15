@@ -6,9 +6,9 @@ import { useStore } from '../../stores/ProvideStore';
 const MissHits = () => {
   const { playerStore } = useStore();
 
-  if (playerStore.timer.playtime === 0 || !playerStore.trackMissHits) return null;
-
   const missHitsContent = useRef<HTMLDivElement>(null);
+
+  if (playerStore.timer.playtime === 0 || !playerStore.trackMissHits) return null;
 
   const missHits: ReactNode[] = [];
   Object.keys(playerStore.missHits).forEach((key, index) => {
