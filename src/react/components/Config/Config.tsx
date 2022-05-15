@@ -1,4 +1,5 @@
 import { Tab, Tabs } from 'react-bootstrap';
+import SavedConfigs from './SavedConfigs/SavedConfigs';
 import TimerConfig from './TimerConfig/TimerConfig';
 import VisualiserConfig from './VisualiserConfig/VisualiserConfig';
 
@@ -13,6 +14,10 @@ const Config = () => {
 
         <Tab eventKey="visualiser" title="Visualiser config">
           <VisualiserConfig />
+        </Tab>
+
+        <Tab eventKey="configs" title="Saved configs">
+          <SavedConfigs />
         </Tab>
       </Tabs>
     </>

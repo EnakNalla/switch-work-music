@@ -33,7 +33,10 @@ export default class PlayerStore {
       const songs = await window.api.selectSongs();
 
       runInAction(() => {
-        this.songs = newList ? songs : this.songs.concat(songs);
+        if (newList) {
+          this.songs = songs;
+          this.song = songs[0];
+        } else this.songs = this.songs.concat(songs);
       });
     } catch (e: any) {
       toast.error(e.message);

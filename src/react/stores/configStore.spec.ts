@@ -1,12 +1,14 @@
 import { toast } from 'react-toastify';
 import { timerStub } from '../test-utils/stubs/playerStubs';
+import { savedConfigStub } from '../test-utils/stubs/SavedConfigStub';
 import ConfigStore from './configStore';
 
 describe('ConfigStore', () => {
   let configStore: ConfigStore;
 
   beforeEach(() => {
-    configStore = new ConfigStore();
+    // @ts-ignore
+    configStore = new ConfigStore({ playerStore: { songs: [] } });
   });
 
   describe('addTimer', () => {
@@ -107,6 +109,51 @@ describe('ConfigStore', () => {
         quaternary: '#35d0ba',
         background: '#000000'
       });
+    });
+  });
+
+  describe('createConfig', () => {
+    it('should call api.setConfigs', () => {
+      configStore.createConfig({ name: 'test' });
+
+      expect(window.api.setConfigs).toHaveBeenCalledTimes(1);
+    });
+    it('should throw error when config exists', () => {
+      const config = savedConfigStub();
+      jest.spyOn(toast, 'error');
+      configStore.savedConfigs = [config];
+
+      expect(() => configStore.createConfig({ name: config.name })).toThrowError(
+        `Config ${config.name} already exists`
+      );
+    });
+
+    it('should update config', () => {
+      configStore.savedConfigs = [savedConfigStub()];
+
+      configStore.createConfig({ name: savedConfigStub().name, update: true });
+
+      expect(window.api.setConfigs).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('deleteConfig', () => {
+    it('should remove config from array', () => {
+      configStore.savedConfigs = [savedConfigStub()];
+
+      configStore.deleteConfig(savedConfigStub().name);
+
+      expect(window.api.setConfigs).toHaveBeenCalledWith([]);
+    });
+  });
+
+  describe('loadConfig', () => {
+    it('should load config', () => {
+      const config = savedConfigStub();
+      configStore.loadConfig(config);
+
+      expect(configStore.loadedConfig).toBe(config.name);
+      expect(configStore.visualiserStroke).toBe(config.config.visualiserStroke);
     });
   });
 });

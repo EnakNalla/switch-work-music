@@ -16,7 +16,8 @@ const schema: Schema<ElectronStore> = {
       { name: '30 seconds', playtime: 30000, default: true },
       { name: 'Indefinite', playtime: 0, default: false }
     ]
-  }
+  },
+  configs: { type: 'array' }
 };
 
 const store = new Store<ElectronStore>({ schema });
@@ -24,4 +25,8 @@ const store = new Store<ElectronStore>({ schema });
 export const storeIpc = () => {
   ipcMain.handle('getTimers', () => store.get('timers'));
   ipcMain.on('setTimers', (e, timers: Timer[]) => store.set('timers', timers));
+
+  ipcMain.handle('getConfigs', () => store.get('configs'));
+
+  ipcMain.on('setConfigs', (e, configs: SavedConfig[]) => store.set('configs', configs));
 };

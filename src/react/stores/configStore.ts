@@ -1,5 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { ChangeEvent } from 'react';
+import { toast } from 'react-toastify';
+import RootStore from './rootStore';
 
 const DEFAULT_COLOURS = {
   primary: '#d92027',
@@ -17,7 +19,10 @@ export default class ConfigStore {
   visualiserStroke = 2;
   trackMissHits = true;
 
-  constructor() {
+  savedConfigs: SavedConfig[] = [];
+  loadedConfig?: string;
+
+  constructor(private root: RootStore) {
     makeAutoObservable(this);
   }
 
@@ -71,4 +76,53 @@ export default class ConfigStore {
   };
 
   resetColours = () => (this.colours = DEFAULT_COLOURS);
+
+  loadConfig = (config: SavedConfig) => {
+    this.loadedConfig = config.name;
+
+    this.root.playerStore.songs = config.songs;
+    this.root.playerStore.song = config.songs[0];
+
+    this.colours = config.config.colours;
+    this.useVisualiser = config.config.useVisualiser;
+    this.trackMissHits = config.config.trackMissHits;
+    this.visualiserStroke = config.config.visualiserStroke;
+    this.visualiserType = config.config.visualiserType;
+  };
+
+  createConfig = ({ name, update }: { name: string; update?: boolean }) => {
+    if (!update) {
+      if (this.savedConfigs.some(c => c.name === name)) {
+        throw new Error(`Config ${name} already exists`);
+      }
+      this.savedConfigs.push(this.generateConfig(name));
+    } else {
+      const generatedConfig = this.generateConfig(name);
+      const config = this.savedConfigs.find(c => c.name === name)!;
+      config.config = generatedConfig.config;
+      config.songs = generatedConfig.songs;
+    }
+
+    window.api.setConfigs(JSON.parse(JSON.stringify(this.savedConfigs)));
+    toast.success(`Config ${name} ${update ? 'updated' : 'created'}`);
+  };
+
+  deleteConfig = (name: string) => {
+    const index = this.savedConfigs.findIndex(c => c.name === name);
+    this.savedConfigs.splice(index, 1);
+
+    window.api.setConfigs(JSON.parse(JSON.stringify(this.savedConfigs)));
+  };
+
+  private generateConfig = (name: string): SavedConfig => ({
+    name,
+    songs: this.root.playerStore.songs,
+    config: {
+      colours: this.colours,
+      useVisualiser: this.useVisualiser,
+      trackMissHits: this.trackMissHits,
+      visualiserStroke: this.visualiserStroke,
+      visualiserType: this.visualiserType
+    }
+  });
 }

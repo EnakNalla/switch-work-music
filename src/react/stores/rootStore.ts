@@ -10,17 +10,19 @@ export default class RootStore {
 
   constructor() {
     this.playerStore = new PlayerStore(this);
-    this.configStore = new ConfigStore();
+    this.configStore = new ConfigStore(this);
 
     makeAutoObservable(this, { playerStore: false });
   }
 
   initData = async () => {
     const timers = await window.api.getTimers();
+    const configs = await window.api.getConfigs();
 
     runInAction(() => {
       this.configStore.timers = timers;
       this.playerStore.timer = timers.find(t => t.default)!;
+      this.configStore.savedConfigs = configs;
 
       this.loading = false;
     });

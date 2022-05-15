@@ -26,6 +26,13 @@ export const electronApi = {
 
   saveMissHits(playlistName: string, content: string) {
     return ipcRenderer.invoke('saveMissHits', playlistName, content);
+  },
+
+  getConfigs(): Promise<SavedConfig[]> {
+    return ipcRenderer.invoke('getConfigs');
+  },
+  setConfigs(configs: SavedConfig[]) {
+    ipcRenderer.send('setConfigs', configs);
   }
 };
 

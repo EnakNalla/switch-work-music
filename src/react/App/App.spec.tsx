@@ -35,7 +35,8 @@ describe('<App />', () => {
         },
         useVisualiser: false,
         visualiserStroke: 2,
-        visualiserType: 'bars'
+        visualiserType: 'bars',
+        savedConfigs: []
       },
       playerStore: {
         timer: timerStub(),
@@ -60,7 +61,8 @@ describe('<App />', () => {
           tertiary: '#ffcd3c',
           quaternary: '#35d0ba',
           background: '#000000'
-        }
+        },
+        savedConfigs: []
       },
       playerStore: {
         timer: timerStub(),
