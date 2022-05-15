@@ -70,6 +70,14 @@ describe('PlayerStore', () => {
     });
   });
 
+  describe('toggleTrackMissHits', () => {
+    it('should set shuffle to true', () => {
+      playerStore.toggleTrackMissHits();
+
+      expect(playerStore.trackMissHits).toBeFalsy();
+    });
+  });
+
   describe('validateKey', () => {
     it('should return false when nodeName === INPUT', () => {
       const kbEv = generateKbEvent('a', 'INPUT');
@@ -327,6 +335,26 @@ describe('PlayerStore', () => {
       playerStore.resetMissHits();
 
       expect(playerStore.missHits).toEqual({});
+    });
+  });
+
+  describe('saveMissHits', () => {
+    it('should call api.saveMissHits', async () => {
+      jest.spyOn(toast, 'success');
+      await playerStore.saveMissHits('content');
+
+      expect(window.api.saveMissHits).toHaveBeenCalled();
+
+      expect(toast.success).toHaveBeenCalledWith('done');
+    });
+
+    it('should toast error from api.saveMissHits', async () => {
+      jest.spyOn(toast, 'error');
+      window.api.saveMissHits = jest.fn().mockReturnValue({ type: 'error', msg: 'done' });
+
+      await playerStore.saveMissHits('content');
+
+      expect(toast.error).toHaveBeenCalledWith('done');
     });
   });
 });

@@ -40,7 +40,8 @@ describe('<App />', () => {
       playerStore: {
         timer: timerStub(),
         songs: [],
-        setupPlayer: jest.fn()
+        setupPlayer: jest.fn(),
+        missHits: {}
       }
     });
 
@@ -65,7 +66,8 @@ describe('<App />', () => {
         timer: timerStub(),
         songs: [],
         setupPlayer: jest.fn(),
-        visualiserActive: true
+        visualiserActive: true,
+        missHits: {}
       }
     });
 

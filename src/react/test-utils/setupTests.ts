@@ -7,5 +7,7 @@ window.api = {
 
   selectSongs: jest.fn().mockResolvedValue([songStub()]),
 
-  setFullscreen: jest.fn()
+  setFullscreen: jest.fn(),
+
+  saveMissHits: jest.fn().mockResolvedValue({ type: 'success', msg: 'done' })
 };

@@ -1,5 +1,6 @@
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
-import { join } from 'path';
+import { writeFileSync } from 'fs';
+import { join, normalize } from 'path';
 import { storeIpc } from './electronStore';
 
 let window: BrowserWindow;
@@ -50,3 +51,17 @@ ipcMain.handle('selectSongs', () => {
 });
 
 ipcMain.on('setFullscreen', (e, bool: boolean) => window.setFullScreen(bool));
+
+ipcMain.handle('saveMissHits', async (e, playlistName: string, content: string) => {
+  const date = new Date().toLocaleDateString().replace(/\//g, '.');
+  const fileName = `${playlistName}-${date}.txt`;
+
+  const savePath = await dialog.showSaveDialog(window, {
+    defaultPath: normalize(process.env.HOME + `/Documents/${fileName}`)
+  });
+
+  if (savePath.canceled) return { msg: 'Failed to save miss hits.', type: 'error' };
+
+  writeFileSync(savePath.filePath!, content);
+  return { msg: 'Saved miss hits', type: 'success' };
+});

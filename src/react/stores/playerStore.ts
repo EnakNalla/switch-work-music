@@ -14,6 +14,7 @@ export default class PlayerStore {
   player?: HTMLAudioElement;
   missHitCount = 0;
   missHits: MissHits = {};
+  trackMissHits = true;
   private timeout?: NodeJS.Timeout;
   currentTime = '00:00';
   duration = '00:00';
@@ -40,6 +41,8 @@ export default class PlayerStore {
   };
 
   toggleShuffle = () => (this.shuffle = !this.shuffle);
+
+  toggleTrackMissHits = () => (this.trackMissHits = !this.trackMissHits);
 
   setSong = (song: Song) => (this.song = song);
 
@@ -99,7 +102,7 @@ export default class PlayerStore {
     }
     clearTimeout(this.timeout!);
 
-    if (this.timer.playtime === 0) return;
+    if (this.timer.playtime === 0 || !this.trackMissHits) return;
 
     const missHitText = this.missHitCount === 1 ? '1 miss hit' : `${this.missHitCount} miss hits`;
     const missHit = this.missHits[this.song!.title];
@@ -134,14 +137,11 @@ export default class PlayerStore {
 
   resetMissHits = () => (this.missHits = {});
 
-  // saveMissHits = async (content: string) => {
-  //   const res = await window.api.saveMissHits(
-  //     this.root.configStore.loadedConfig ?? 'switch-work-music-miss-hits',
-  //     content
-  //   );
-  //   if (res.type === 'error') toast.error(res.msg);
-  //   else toast.success(res.msg);
-  // };
+  saveMissHits = async (content: string) => {
+    const res = await window.api.saveMissHits('switch-work-music-miss-hits', content);
+    if (res.type === 'error') toast.error(res.msg);
+    else toast.success(res.msg);
+  };
 
   private parseAudioTime = (playtime: number) => {
     let m = (playtime / 60) % 60;

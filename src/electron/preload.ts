@@ -22,6 +22,10 @@ export const electronApi = {
 
   setFullscreen(bool: boolean): void {
     ipcRenderer.send('setFullscreen', bool);
+  },
+
+  saveMissHits(playlistName: string, content: string) {
+    return ipcRenderer.invoke('saveMissHits', playlistName, content);
   }
 };
 
