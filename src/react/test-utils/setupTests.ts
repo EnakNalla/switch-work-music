@@ -5,5 +5,7 @@ window.api = {
   getTimers: jest.fn().mockResolvedValue([timerStub()]),
   setTimers: jest.fn(),
 
-  selectSongs: jest.fn().mockResolvedValue([songStub()])
+  selectSongs: jest.fn().mockResolvedValue([songStub()]),
+
+  setFullscreen: jest.fn()
 };

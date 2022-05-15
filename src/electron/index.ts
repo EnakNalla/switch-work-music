@@ -48,3 +48,5 @@ ipcMain.handle('selectSongs', () => {
     ]
   });
 });
+
+ipcMain.on('setFullscreen', (e, bool: boolean) => window.setFullScreen(bool));

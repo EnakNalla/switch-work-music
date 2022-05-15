@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { Container, Image, Spinner } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import AudioPlayer from '../components/Audio/AudioPlayer';
+import Visualiser from '../components/Audio/Visualiser';
 import Config from '../components/Config/Config';
 import Playlist from '../components/Playlist/Playlist';
 import { useStore } from '../stores/ProvideStore';
@@ -27,23 +29,33 @@ const App = () => {
   }
 
   return (
-    <Container fluid id={styles.gridContainer} className="text-center">
-      <div id={styles.config}>
-        <Config />
-      </div>
+    <>
+      <Container
+        data-testid="main"
+        fluid
+        id={styles.gridContainer}
+        className={store.playerStore.visualiserActive ? 'visually-hidden' : ''}
+      >
+        <div id={styles.config} className="text-center">
+          <Config />
+        </div>
 
-      <div id={styles.main} className="text-center">
-        <h3>Switch work Music</h3>
-        <Image src="/logo.png" alt="Jellybean switch" width={64} height={64} />
-      </div>
+        <div id={styles.main} className="text-center">
+          <h3>Switch work Music</h3>
+          <Image src="/logo.png" alt="Jellybean switch" width={64} height={64} />
 
-      <div id={styles.playlist} className="text-center">
-        <h3>Playlist</h3>
-        <Playlist />
-      </div>
+          <AudioPlayer />
+        </div>
 
-      <ToastContainer position="bottom-right" />
-    </Container>
+        <div id={styles.playlist} className="text-center">
+          <h3>Playlist</h3>
+          <Playlist />
+        </div>
+        <ToastContainer position="bottom-right" />
+      </Container>
+
+      <Visualiser />
+    </>
   );
 };
 

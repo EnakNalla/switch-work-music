@@ -58,4 +58,53 @@ describe('ConfigStore', () => {
       ]);
     });
   });
+
+  describe('setColour', () => {
+    it('should update specified colour', () => {
+      configStore.setColour('background', '#eaeaea');
+
+      expect(configStore.colours.background).toBe('#eaeaea');
+    });
+  });
+
+  describe('setUseVisualiser', () => {
+    it('should set useVisualiser', () => {
+      configStore.setUseVisualiser(false);
+
+      expect(configStore.useVisualiser).toBeFalsy();
+    });
+  });
+
+  describe('setVisualiserType', () => {
+    it('should set visualiser type', () => {
+      configStore.setVisualiserType('dualbars');
+
+      expect(configStore.visualiserType).toBe('dualbars');
+    });
+  });
+
+  describe('setVisualiserStroke', () => {
+    it('should set visualiser stroke', () => {
+      configStore.setVisualiserStroke(10);
+
+      expect(configStore.visualiserStroke).toBe(10);
+    });
+  });
+
+  describe('resetColours', () => {
+    it('should reset to DEFAULT_COLOURS', () => {
+      // @ts-ignore
+      configStore.colours = {};
+
+      configStore.resetColours();
+
+      expect(configStore.colours).toEqual({
+        primary: '#d92027',
+        secondary: '#ff9234',
+        tertiary: '#ffcd3c',
+        quaternary: '#35d0ba',
+        background: '#000000'
+      });
+    });
+  });
 });

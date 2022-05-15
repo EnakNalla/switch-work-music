@@ -1,7 +1,20 @@
 import { makeAutoObservable } from 'mobx';
 
+const DEFAULT_COLOURS = {
+  primary: '#d92027',
+  secondary: '#ff9234',
+  tertiary: '#ffcd3c',
+  quaternary: '#35d0ba',
+  background: '#000000'
+};
+
 export default class ConfigStore {
   timers: Timer[] = [];
+  useVisualiser = true;
+  colours = DEFAULT_COLOURS;
+  visualiserType: VisualiserTypes = 'cubes';
+  visualiserStroke = 2;
+  trackMissHits = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -41,4 +54,16 @@ export default class ConfigStore {
   private saveTimers = () => {
     window.api.setTimers(JSON.parse(JSON.stringify(this.timers)));
   };
+
+  setColour = (key: ColourKeys, colour: string) => {
+    this.colours[key] = colour;
+  };
+
+  setUseVisualiser = (bool: boolean) => (this.useVisualiser = bool);
+
+  setVisualiserType = (type: VisualiserTypes) => (this.visualiserType = type);
+
+  setVisualiserStroke = (stroke: number) => (this.visualiserStroke = stroke);
+
+  resetColours = () => (this.colours = DEFAULT_COLOURS);
 }

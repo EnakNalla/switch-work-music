@@ -20,6 +20,7 @@
     "out:linux": "pnpm build && electron-builder build --linux"
   },
   "devDependencies": {
+    "@foobar404/wave": "^1.0.0",
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",

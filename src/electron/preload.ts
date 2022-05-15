@@ -18,6 +18,10 @@ export const electronApi = {
       title: path.basename(p, path.extname(p)),
       path: path.join('file://', path.normalize(p))
     }));
+  },
+
+  setFullscreen(bool: boolean): void {
+    ipcRenderer.send('setFullscreen', bool);
   }
 };
 
