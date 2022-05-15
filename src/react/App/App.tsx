@@ -36,7 +36,7 @@ const App = () => {
         id={styles.gridContainer}
         className={store.playerStore.visualiserActive ? 'visually-hidden' : ''}
       >
-        <div id={styles.config} className="text-center">
+        <div id={styles.config}>
           <Config />
         </div>
 

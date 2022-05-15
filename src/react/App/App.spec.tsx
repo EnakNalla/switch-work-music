@@ -24,7 +24,19 @@ describe('<App />', () => {
     render(<App />, {
       loading: false,
       initData: jest.fn(),
-      configStore: { timers: [] },
+      configStore: {
+        timers: [],
+        colours: {
+          primary: '#d92027',
+          secondary: '#ff9234',
+          tertiary: '#ffcd3c',
+          quaternary: '#35d0ba',
+          background: '#000000'
+        },
+        useVisualiser: false,
+        visualiserStroke: 2,
+        visualiserType: 'bars'
+      },
       playerStore: {
         timer: timerStub(),
         songs: [],

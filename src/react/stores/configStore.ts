@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import { ChangeEvent } from 'react';
 
 const DEFAULT_COLOURS = {
   primary: '#d92027',
@@ -59,11 +60,15 @@ export default class ConfigStore {
     this.colours[key] = colour;
   };
 
-  setUseVisualiser = (bool: boolean) => (this.useVisualiser = bool);
+  toggleUseVisualiser = () => (this.useVisualiser = !this.useVisualiser);
 
-  setVisualiserType = (type: VisualiserTypes) => (this.visualiserType = type);
+  setVisualiserType = (e: ChangeEvent<HTMLSelectElement>) => {
+    this.visualiserType = e.target.value as VisualiserTypes;
+  };
 
-  setVisualiserStroke = (stroke: number) => (this.visualiserStroke = stroke);
+  setVisualiserStroke = (e: ChangeEvent<HTMLSelectElement>) => {
+    this.visualiserStroke = parseInt(e.target.value);
+  };
 
   resetColours = () => (this.colours = DEFAULT_COLOURS);
 }

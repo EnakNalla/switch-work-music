@@ -67,9 +67,9 @@ describe('ConfigStore', () => {
     });
   });
 
-  describe('setUseVisualiser', () => {
+  describe('toggleUseVisualiser', () => {
     it('should set useVisualiser', () => {
-      configStore.setUseVisualiser(false);
+      configStore.toggleUseVisualiser();
 
       expect(configStore.useVisualiser).toBeFalsy();
     });
@@ -77,7 +77,8 @@ describe('ConfigStore', () => {
 
   describe('setVisualiserType', () => {
     it('should set visualiser type', () => {
-      configStore.setVisualiserType('dualbars');
+      // @ts-ignore
+      configStore.setVisualiserType({ target: { value: 'dualbars' } });
 
       expect(configStore.visualiserType).toBe('dualbars');
     });
@@ -85,7 +86,8 @@ describe('ConfigStore', () => {
 
   describe('setVisualiserStroke', () => {
     it('should set visualiser stroke', () => {
-      configStore.setVisualiserStroke(10);
+      // @ts-ignore
+      configStore.setVisualiserStroke({ target: { value: 10 } });
 
       expect(configStore.visualiserStroke).toBe(10);
     });
