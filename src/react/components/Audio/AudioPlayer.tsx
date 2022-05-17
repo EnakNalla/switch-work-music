@@ -24,6 +24,7 @@ const AudioPlayer = () => {
         src={playerStore.song?.path}
         onPlay={playerStore.onPlay}
         onPause={playerStore.onPause}
+        onEnded={playerStore.onEnded}
         onTimeUpdate={playerStore.onTimeUpdate}
         onDurationChange={playerStore.onDurationChange}
       />
