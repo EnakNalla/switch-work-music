@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { ReactNode, useRef } from 'react';
 import { Button, ButtonGroup, ListGroup } from 'react-bootstrap';
 import { useStore } from '../../stores/ProvideStore';
+import styles from './MissHits.module.scss';
 
 const MissHits = () => {
   const { playerStore } = useStore();
@@ -21,7 +22,7 @@ const MissHits = () => {
     ));
 
     missHits.push(
-      <div key={index}>
+      <div key={index} className="mb-2">
         <h5>{key}</h5>
         <ListGroup as="ol" numbered>
           {listItems}
@@ -46,7 +47,9 @@ const MissHits = () => {
           </Button>
         </ButtonGroup>
       </div>
-      <div ref={missHitsContent}>{missHits}</div>
+      <div ref={missHitsContent} className="mt-2" id={styles.missHitContainer}>
+        {missHits}
+      </div>
     </div>
   );
 };
