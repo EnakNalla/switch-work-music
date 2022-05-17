@@ -36,6 +36,11 @@ const Playlist = () => {
                 onClick={() => playerStore.setSong(s)}
               >
                 <td>{s.title}</td>
+                <td>
+                  <Button variant="danger" onClick={() => playerStore.removeSong(s.title)}>
+                    Delete
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>

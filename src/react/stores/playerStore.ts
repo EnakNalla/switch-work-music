@@ -43,6 +43,11 @@ export default class PlayerStore {
     }
   };
 
+  removeSong = (title: string) => {
+    const index = this.songs.findIndex(s => s.title === title);
+    this.songs.splice(index, 1);
+  };
+
   toggleShuffle = () => (this.shuffle = !this.shuffle);
 
   toggleTrackMissHits = () => (this.trackMissHits = !this.trackMissHits);

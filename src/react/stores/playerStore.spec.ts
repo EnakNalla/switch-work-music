@@ -46,11 +46,22 @@ describe('PlayerStore', () => {
 
     it('should toast error from api.selectSongs', async () => {
       jest.spyOn(toast, 'error');
-      window.api.selectSongs = jest.fn().mockRejectedValue(new Error('it error'));
+      window.api.selectSongs = jest.fn().mockRejectedValue(new Error('test error'));
 
       await playerStore.selectSongs(true);
 
-      expect(toast.error).toHaveBeenCalledWith('it error');
+      expect(toast.error).toHaveBeenCalledWith('test error');
+    });
+  });
+
+  describe('removeSong', () => {
+    it('should remove song from songs array', () => {
+      const song = songStub();
+      playerStore.songs = [song];
+
+      playerStore.removeSong(song.title);
+
+      expect(playerStore.songs).toEqual([]);
     });
   });
 

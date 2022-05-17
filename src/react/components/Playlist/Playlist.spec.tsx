@@ -37,4 +37,14 @@ describe('<Playlist />', () => {
 
     expect(playerStore.setSong).toHaveBeenCalledWith(songStub());
   });
+
+  it('should call removeSong onClick', async () => {
+    const song = songStub();
+    const playerStore = { songs: [song], removeSong: jest.fn(), setSong: jest.fn() };
+    render(<Playlist />, { playerStore });
+
+    await userEvent.click(screen.getByRole('button', { name: 'Delete' }));
+
+    expect(playerStore.removeSong).toHaveBeenCalledWith(song.title);
+  });
 });
