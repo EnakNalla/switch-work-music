@@ -1,3 +1,7 @@
+# DEPRECIATED
+Look at https://github.com/EnakNalla/adaptive-music-player instead
+
+
 # Switch work Music
 
 ## About
